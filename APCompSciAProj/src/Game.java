@@ -9,6 +9,8 @@ public class Game extends Canvas implements Runnable{
 	
 	private boolean isRunning = false;
 	private Thread thread;
+	int w;
+	int l;
 	
 	public static void main (String args[]) {
 		new Game();
@@ -16,7 +18,9 @@ public class Game extends Canvas implements Runnable{
 	
 	
 	public Game() {
-		new Window(1000,563,"Project",this);
+		w=1440;
+		l=840;
+		new Window(w,l,"GameProject",this);
 		start();
 	}
 	
@@ -38,34 +42,34 @@ public class Game extends Canvas implements Runnable{
 		}
 	}
 
-	
+	//the run(), render(), & tick() method is from Notch (the creator of minecraft)
 	public void run() {
-		  this.requestFocus();
-		  long lastTime = System.nanoTime();
-		  double amountOfTicks = 60.0;
-		  double ns = 1000000000 / amountOfTicks;
-		  double delta = 0;
-		  long timer = System.currentTimeMillis();
-		  int frames = 0;
-		  while (isRunning) {
-		   long now = System.nanoTime();
-		   delta += (now - lastTime) /ns;
-		   lastTime = now;
-		   while(delta >= 1) {
-		    tick();
-		    //updates++;
-		    delta--;
-		   }
-		   render();
-		   frames++;
-		   
-		   if (System.currentTimeMillis() - timer > 1000) {
-		    timer += 1000;
-		    frames = 0;
-		   }
+	  this.requestFocus();
+	  long lastTime = System.nanoTime();
+	  double amountOfTicks = 60.0;
+	  double ns = 1000000000 / amountOfTicks;
+	  double delta = 0;
+	  long timer = System.currentTimeMillis();
+	  int frames = 0;
+	  while (isRunning) {
+		  long now = System.nanoTime();
+		  delta += (now - lastTime) /ns;
+		  lastTime = now;
+		  while(delta >= 1) {
+			  tick();
+			  //updates++;
+			  delta--;
 		  }
+		  render();
+		  frames++;
+		  if (System.currentTimeMillis() - timer > 1000) {
+			 timer += 1000;
+			 frames = 0;
+		  }
+	  }
 		  stop();
-		 }
+	}
+	
 	
 	public void tick() {
 		
@@ -82,8 +86,11 @@ public class Game extends Canvas implements Runnable{
 		Graphics g = bs.getDrawGraphics();
 		///////////////////////////////////
 		
+		g.setColor(Color.green);
+		g.fillRect(0, 0, w, l);
+		
 		g.setColor(Color.red);
-		g.fillRect(0, 0, 1000, 563);
+		g.fillRect(0, 0, w/2, l/2);
 		
 		///////////////////////////////////
 		g.dispose();
