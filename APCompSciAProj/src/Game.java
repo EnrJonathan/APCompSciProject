@@ -83,10 +83,12 @@ start();
 handler = new Handler();
 
 
-handler.addObject(new Box(50,50));
-handler.addObject(new Box(50,150));
-handler.addObject(new Box(50,250));
-handler.addObject(new Box(50,350));
+handler.addObject(new Zombie(10,0));
+handler.addObject(new Zombie(10,100));
+handler.addObject(new Zombie(10,200));
+handler.addObject(new Zombie(10,300));
+handler.addObject(new Zombie(10,400));
+handler.addObject(new Zombie(10,500));
 
 
 }
