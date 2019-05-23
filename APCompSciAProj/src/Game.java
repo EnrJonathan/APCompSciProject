@@ -83,10 +83,10 @@ start();
 handler = new Handler();
 
 
-handler.addObject(new Box(100,100));
-
-handler.addObject(new Box(100,300));
-
+handler.addObject(new Box(50,50));
+handler.addObject(new Box(50,150));
+handler.addObject(new Box(50,250));
+handler.addObject(new Box(50,350));
 
 
 }
@@ -204,52 +204,32 @@ return;
 
 }
 
-
-
 Graphics g = bs.getDrawGraphics();
-
 ///////////////////////////////////
-
-
-g.setColor(colorTemp = new Color(0, 255, 0));
-
+g.setColor(colorTemp = new Color(20, 20, 20));
 g.fillRect(0, 0, w, l);
 
-
+/*
 g.setColor(colorTemp = new Color(0, 255, 255));
-
 g.fillRect(0, 0, w/2, l/2);
 
-
 g.setColor(colorTemp = new Color(255, 0, 0,122));
-
 g.fillOval(400,400,100,100);
 
 g.setColor(colorTemp = new Color(0, 0, 255,122));
-
 g.fillOval(450,400,100,100);
+*/
 
-
-g.setFont(fontTemp = new Font("Arial", Font.BOLD, 30));
-
+g.setFont(fontTemp = new Font("LucidaSans", Font.BOLD, 30));
 g.setColor(colorTemp = new Color(255,255,255,255));
-
-g.drawString("TAX FRAUD",200,200);
-
+g.drawString("TAX FRAUD",w/2,l/2);
 
 handler.render(g);
-
-
 ///////////////////////////////////
-
 g.dispose();
-
 bs.show();
 
 }
-
-
-
 
 }
 

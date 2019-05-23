@@ -18,7 +18,9 @@ super(x, y);
 
 
 
+//velY= 2;
 velX=1;
+
 
 }
 
@@ -40,10 +42,8 @@ y+=velY;
 
 public void render(Graphics g) {
 
-g.setColor(colorTemp = new Color(218,9,233,175));
-
-g.fillRect(x, y, 100, 100);
-
+g.setColor(colorTemp = new Color(40,175,40,255));
+g.fillRect(x, y, 25, 25);
 
 }
 
