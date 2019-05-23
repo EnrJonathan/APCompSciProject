@@ -71,9 +71,9 @@ new Game();
 
 public Game() {
 
-w=1000;  //1440
+w=1000;  //1000
 
-l=563;   //840
+l=563;   //563
 
 new Window(w,l,"GameProject",this);
 
@@ -83,7 +83,7 @@ start();
 handler = new Handler();
 
 
-handler.addObject(new Zombie(10,0));
+handler.addObject(new Zombie(10,3));
 handler.addObject(new Zombie(10,100));
 handler.addObject(new Zombie(10,200));
 handler.addObject(new Zombie(10,300));
