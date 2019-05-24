@@ -71,9 +71,9 @@ new Game();
 
 public Game() {
 
-w=1000;  //1000
+w=1400;  //1000
 
-l=563;   //563
+l=800;   //563
 
 new Window(w,l,"GameProject",this);
 
@@ -83,12 +83,8 @@ start();
 handler = new Handler();
 
 
-handler.addObject(new Zombie(10,3));
-handler.addObject(new Zombie(10,100));
-handler.addObject(new Zombie(10,200));
-handler.addObject(new Zombie(10,300));
-handler.addObject(new Zombie(10,400));
-handler.addObject(new Zombie(10,500));
+//handler.addObject(new Zombie(10,3));
+
 
 
 }
@@ -96,34 +92,21 @@ handler.addObject(new Zombie(10,500));
 
 
 private void start() {
-
 isRunning = true;
-
 thread = new Thread(this);
-
 thread.start();
-
-
 }
 
 
 
 private void stop() {
-
 isRunning = false;
-
 try {
-
 thread.join();
-
 } catch (InterruptedException e) {
-
 e.printStackTrace();
-
 }
-
 }
-
 
 
 //the run(), render(), & tick() method is from Notch (the creator of minecraft)
@@ -181,57 +164,57 @@ frames = 0;
 }
 
 
-
 public void tick() {
-
 handler.tick();
-
 }
-
 
 
 public void render() {
-
 Color colorTemp;
-
 Font fontTemp;
-
 BufferStrategy bs = this.getBufferStrategy();
-
 if(bs == null) {
-
 this.createBufferStrategy(3);
-
 return;
-
 }
+
 
 Graphics g = bs.getDrawGraphics();
 ///////////////////////////////////
 g.setColor(colorTemp = new Color(20, 20, 20));
 g.fillRect(0, 0, w, l);
 
-/*
-g.setColor(colorTemp = new Color(0, 255, 255));
-g.fillRect(0, 0, w/2, l/2);
 
-g.setColor(colorTemp = new Color(255, 0, 0,122));
-g.fillOval(400,400,100,100);
+/////////////background
+g.setColor(colorTemp = new Color(52, 53, 54));
 
-g.setColor(colorTemp = new Color(0, 0, 255,122));
-g.fillOval(450,400,100,100);
-*/
 
-g.setFont(fontTemp = new Font("LucidaSans", Font.BOLD, 30));
-g.setColor(colorTemp = new Color(255,255,255,255));
-g.drawString("TAX FRAUD",w/2,l/2);
+///////////////////////
+
+
+/////////walls
+g.setColor(colorTemp = new Color(82, 11, 63));
+g.fillRect(-100, 0, 700,375 );
+g.fillRect(-100, 800-225, 700,375 );
+((Graphics2D) g).rotate(Math.toRadians(-20));
+g.fillRect(200,750 , 200,375 );
+((Graphics2D) g).rotate(Math.toRadians(40));
+g.fillRect(457,-224 , 200,375 );
+((Graphics2D) g).rotate(Math.toRadians(-20));
+g.fillRect(750,425 , 75,100 );
+
+/////////////
+
+
+
+////g.setFont(fontTemp = new Font("LucidaSans", Font.BOLD, 30));
+//g.setColor(colorTemp = new Color(255,255,255,255));
+//g.drawString("TAX FRAUD",w/2,l/2);
 
 handler.render(g);
 ///////////////////////////////////
 g.dispose();
 bs.show();
-
 }
-
 }
 
