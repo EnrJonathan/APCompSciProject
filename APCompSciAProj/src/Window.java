@@ -13,7 +13,7 @@ public class Window {
 		frame.setMinimumSize(new Dimension(width, height));
 		
 		frame.add(game);
-		frame.setResizable(true);
+		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);

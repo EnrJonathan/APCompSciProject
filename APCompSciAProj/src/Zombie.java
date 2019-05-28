@@ -25,10 +25,10 @@ y+=velY;
 public void render(Graphics g) {
 Font fontTemp2;
 g.setColor(colorTemp = new Color(40,175,40,255));
-g.fillRect(x, y, 10, 10);
-g.setFont(fontTemp2 = new Font("LucidaSans", Font.BOLD, 7));
+g.fillOval(x, y, 20, 20);
+g.setFont(fontTemp2 = new Font("LucidaSans", Font.BOLD, 15));
 g.setColor(Color.white);
-g.drawString("Z",x+2,y+5);
+g.drawString("Z",x+7,y+15);
 }
 
 

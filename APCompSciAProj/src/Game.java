@@ -1,43 +1,23 @@
 import java.awt.BorderLayout;
-
 import java.awt.Canvas;
-
 import java.awt.Color;
-
 import java.awt.Dimension;
-
 import java.awt.EventQueue;
-
 import java.awt.Font;
-
 import java.awt.Graphics;
-
 import java.awt.Graphics2D;
-
 import java.awt.event.ActionEvent;
-
 import java.awt.event.ActionListener;
-
 import java.awt.event.KeyEvent;
-
 import java.awt.image.BufferStrategy;
-
 import javax.swing.AbstractAction;
-
 import javax.swing.ActionMap;
-
 import javax.swing.InputMap;
-
 import javax.swing.JFrame;
-
 import javax.swing.JPanel;
-
 import javax.swing.KeyStroke;
-
 import javax.swing.Timer;
-
 import javax.swing.UIManager;
-
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class Game extends Canvas implements Runnable{
@@ -56,21 +36,13 @@ new Game();
 
 
 public Game() {
-
-w=1275;  //1400
-
+w=1275;  //1275
 l=800;   //800
-
 new Window(w,l,"GameProject",this);
-
 start();
-
-
 handler = new Handler();
 
-
-//handler.addObject(new Zombie(10,3));
-
+handler.addObject(new Zombie(10,450));
 
 
 }
@@ -195,7 +167,7 @@ g.fillRect(605, 900, 20,125 );
 ((Graphics2D) g).rotate(Math.toRadians(25));
 
 g.fillRect(650, 725, 225,125 );
-g.fillRect(1240, 300, 125,175 );
+g.fillRect(1240, 350, 125,175 );
 g.fillRect(1220, 720, 125,225 );
 g.fillRect(1150, 0, 200,175 );
 g.fillRect(1100, 75, 200,75 );
@@ -204,9 +176,9 @@ g.fillRect(860, 140,40,40 );
 g.fillRect(820, 60,30,30 );
 
 g.fillRect(0,0,6,l );
-g.fillRect(0, 0,w,6 );        //borders of map
-g.fillRect(w-6,0,6,l );
-g.fillRect(0,l-26,w,6 ); //fix(not alligned with border)
+g.fillRect(0, 0,w,6 );                //borders of map
+g.fillRect(w-10,0,6,l );  //-6 for mac
+g.fillRect(0,l-33,w,6 );   //-26  for mac
 /////////////
 
 

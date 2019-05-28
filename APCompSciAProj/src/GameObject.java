@@ -1,5 +1,4 @@
 import java.awt.Graphics;
-
 import java.awt.Rectangle;
 
 
@@ -34,44 +33,28 @@ return x;
 
 
 public void setX(int x) {
-
 this.x = x;
-
 }
-
 
 
 public float getVelX() {
-
 return velX;
-
 }
-
 
 
 public void setVelX(float velX) {
-
 this.velX = velX;
-
 }
-
 
 
 public float getVelY() {
-
 return velY;
-
 }
-
 
 
 public void setVelY(float velY) {
-
 this.velY = velY;
-
 }
-
-
 
 }
 
