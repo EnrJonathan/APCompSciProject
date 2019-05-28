@@ -40,40 +40,26 @@ import javax.swing.UIManager;
 
 import javax.swing.UnsupportedLookAndFeelException;
 
-
-
-
-
 public class Game extends Canvas implements Runnable{
 
-
 private static final long serialVersionUID = 1L;
-
-
 private boolean isRunning = false;
-
 private Thread thread;
-
 private Handler handler;
-
 int w;
-
 int l;
 
 
 public static void main (String args[]) {
-
 new Game();
-
 }
-
 
 
 public Game() {
 
-w=1400;  //1000
+w=1275;  //1400
 
-l=800;   //563
+l=800;   //800
 
 new Window(w,l,"GameProject",this);
 
@@ -187,22 +173,40 @@ g.fillRect(0, 0, w, l);
 
 /////////////background
 g.setColor(colorTemp = new Color(52, 53, 54));
-
-
 ///////////////////////
 
 
 /////////walls
 g.setColor(colorTemp = new Color(82, 11, 63));
-g.fillRect(-100, 0, 700,375 );
-g.fillRect(-100, 800-225, 700,375 );
-((Graphics2D) g).rotate(Math.toRadians(-20));
-g.fillRect(200,750 , 200,375 );
-((Graphics2D) g).rotate(Math.toRadians(40));
-g.fillRect(457,-224 , 200,375 );
-((Graphics2D) g).rotate(Math.toRadians(-20));
-g.fillRect(750,425 , 75,100 );
+g.fillRect(-100, 0, 400,400 );
+g.fillRect(-100, 575, 400,375 );
+g.fillRect(450,450 , 50,75 );
+g.fillRect(450,375 , 10,225 );
+g.fillRect(0, 0, 750,100 );
+g.fillRect(700, 0, 50,175 );
+g.fillOval(500, 30, 250,250 );
 
+((Graphics2D) g).rotate(Math.toRadians(25));
+g.fillRect(950,-180,25,200);
+g.fillRect(930, -130, 20,125 );
+((Graphics2D) g).rotate(Math.toRadians(-50));
+g.fillRect(625,850,25,200);
+g.fillRect(605, 900, 20,125 );
+((Graphics2D) g).rotate(Math.toRadians(25));
+
+g.fillRect(650, 725, 225,125 );
+g.fillRect(1240, 300, 125,175 );
+g.fillRect(1220, 720, 125,225 );
+g.fillRect(1150, 0, 200,175 );
+g.fillRect(1100, 75, 200,75 );
+
+g.fillRect(860, 140,40,40 );
+g.fillRect(820, 60,30,30 );
+
+g.fillRect(0,0,6,l );
+g.fillRect(0, 0,w,6 );        //borders of map
+g.fillRect(w-6,0,6,l );
+g.fillRect(0,l-26,w,6 ); //fix(not alligned with border)
 /////////////
 
 
