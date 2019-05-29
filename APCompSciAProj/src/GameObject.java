@@ -1,30 +1,37 @@
 import java.awt.Graphics;
 import java.awt.Rectangle;
-
+import java.awt.Rectangle;
 
 
 public abstract class GameObject {
+	
+	
+	
 protected int x,y;
-public int getY() {
-return y;
-}
-
-
-
-public void setY(int y) {
-this.y = y;
-}
-
 protected float velX = 0, velY=0;
-public  GameObject(int x,int y) {
-this.x=x;
-this.y=y;
+protected ID id;
+
+
+public  GameObject(int x,int y, ID id) {
+	this.x=x;
+	this.y=y;
+	this.id=id;
 }
 
 
 public abstract void tick();
 public abstract void render(Graphics g);
 public abstract Rectangle getBounds();
+
+
+public ID getId() {
+	return id;
+}
+
+
+public void setId(ID id) {
+	this.id = id;
+}
 
 
 public int getX() {
@@ -54,6 +61,16 @@ return velY;
 
 public void setVelY(float velY) {
 this.velY = velY;
+}
+
+
+public int getY() {
+return y;
+}
+
+
+public void setY(int y) {
+this.y = y;
 }
 
 }

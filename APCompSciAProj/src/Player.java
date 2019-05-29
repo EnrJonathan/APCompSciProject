@@ -1,45 +1,44 @@
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+public class Player extends GameObject{
 
-public class Player extends Rectangle{
-public Color colorTemp;
+	Handler handler;
+	
+	
+	public Player(int x, int y, ID id,Handler handler) {
+		super(x, y, id);
+		this.handler = handler;
+	}
 
-private int dx,dy;
+	
+	public void tick() {		
+		x+=velX;
+		y+=velY;
+		
+		if(handler.isUp()) velY=-3;
+		else if(!handler.isDown()) velY=0;
+		
+		
+		if(handler.isDown()) velY=3;
+		else if(!handler.isUp()) velY=0;
+		
+		if(handler.isRight()) velX=3;
+		else if(!handler.isLeft()) velX=0;
+		
+		if(handler.isLeft()) velX=-3;
+		else if(!handler.isRight()) velX=0;
+	}
 
-public Player(int x, int y, int width, int height, int dx, int dy) {
-setBounds(x,y,width,height);
-this.dx=dx;
-this.dy=dy;
-}
+	
+	public void render(Graphics g) {
+		g.setColor(Color.yellow);
+		g.fillOval(x, y, 20, 20);
+	}
 
-
-public void tick() {
-this.x+=dx;
-this.y+=dy;
-}
-
-
-public void render(Graphics g) {
-g.setColor(colorTemp = new Color(244,241,66,255));
-g.fillOval(x, y, 20, 20);
-
-}
-
-
-public Rectangle getBounds() {
-return null;
-}
-
-
-public void setDx(int dx) {
-	this.dx = dx;
-}
-
-
-public void setDy(int dy) {
-	this.dy = dy;
-}
+	
+	public Rectangle getBounds() {
+		return new Rectangle(x, y, 19, 19);
+	}
 }

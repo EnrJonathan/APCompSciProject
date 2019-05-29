@@ -1,24 +1,11 @@
-import java.awt.BorderLayout;
+
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
-import javax.swing.AbstractAction;
-import javax.swing.ActionMap;
-import javax.swing.InputMap;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.KeyStroke;
-import javax.swing.Timer;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+
 
 public class Game extends Canvas implements Runnable{
 
@@ -36,15 +23,15 @@ new Game();
 
 
 public Game() {
-w=1275;  //1275
+w=1275;  //1400
 l=800;   //800
 new Window(w,l,"GameProject",this);
 start();
 handler = new Handler();
+this.addKeyListener(new KeyInput(handler));
 
-handler.addObject(new Zombie(10,450));
-
-
+handler.addObject(new Player(50,450,ID.Player, handler));
+handler.addObject(new Zombie(10,450,ID.Zombie));
 }
 
 
@@ -177,8 +164,8 @@ g.fillRect(820, 60,30,30 );
 
 g.fillRect(0,0,6,l );
 g.fillRect(0, 0,w,6 );                //borders of map
-g.fillRect(w-10,0,6,l );  //-6 for mac
-g.fillRect(0,l-33,w,6 );   //-26  for mac
+g.fillRect(w-10,0,50,l );  //-6 for mac
+g.fillRect(0,l-33,w,50 );   //-26  for mac
 /////////////
 
 

@@ -9,10 +9,10 @@ public class Zombie extends GameObject{
 public Color colorTemp;
 
 
-public Zombie(int x, int y) {
-super(x, y);
+public Zombie(int x, int y, ID id) {
+super(x,y,id);
 //velY= 2;
-velX=(int)(Math.random()*5)+1;
+//velX=(int)(Math.random()*5)+1;
 }
 
 
