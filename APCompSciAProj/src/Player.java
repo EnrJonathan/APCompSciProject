@@ -16,10 +16,12 @@ public class Player extends GameObject{
 	public void tick() {		
 		x+=velX;
 		y+=velY;
+		collision();
 		
+		
+		//movement
 		if(handler.isUp()) velY=-3;
 		else if(!handler.isDown()) velY=0;
-		
 		
 		if(handler.isDown()) velY=3;
 		else if(!handler.isUp()) velY=0;
@@ -29,16 +31,33 @@ public class Player extends GameObject{
 		
 		if(handler.isLeft()) velX=-3;
 		else if(!handler.isRight()) velX=0;
+		
+	}
+	
+	
+	private void collision() {
+		for (int i = 0; i < handler.object.size();i++){
+			
+			GameObject tempObject = handler.object.get(i);
+			
+			if(tempObject.getId() == ID.Block) {
+				
+				if (getBounds().intersects(tempObject.getBounds())) {
+					x += velX * -1;
+					y += velY * -1;
+				}	
+			}
+		}
 	}
 
 	
 	public void render(Graphics g) {
-		g.setColor(Color.yellow);
-		g.fillOval(x, y, 20, 20);
+		g.setColor(Color.blue);
+		g.fillRect(x, y, 20, 20);
 	}
 
 	
 	public Rectangle getBounds() {
-		return new Rectangle(x, y, 19, 19);
+		return new Rectangle(x, y, 20, 20);
 	}
 }

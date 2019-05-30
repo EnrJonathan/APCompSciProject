@@ -9,7 +9,7 @@ public class Handler {
 
 LinkedList<GameObject> object = new LinkedList<GameObject>();
 
-private boolean up = false, down = false, left = false, right = false;
+private boolean up = false, down = false, right = false, left = false;
 
 public void tick() {
 

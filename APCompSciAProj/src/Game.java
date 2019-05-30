@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 
 public class Game extends Canvas implements Runnable{
@@ -13,9 +14,10 @@ private static final long serialVersionUID = 1L;
 private boolean isRunning = false;
 private Thread thread;
 private Handler handler;
-int w;
-int l;
+private Camera camera;
 
+
+private BufferedImage level = null;
 
 public static void main (String args[]) {
 new Game();
@@ -23,15 +25,19 @@ new Game();
 
 
 public Game() {
-w=1275;  //1400
-l=800;   //800
-new Window(w,l,"GameProject",this);
-start();
-handler = new Handler();
-this.addKeyListener(new KeyInput(handler));
+	new Window(1000,563,"GameProject",this);
+	start();
 
-handler.addObject(new Player(50,450,ID.Player, handler));
-handler.addObject(new Zombie(10,450,ID.Zombie));
+
+	handler = new Handler();
+	camera = new Camera(0,0);
+	this.addKeyListener(new KeyInput(handler));
+	this.addMouseListener(new MouseInput(handler,camera));
+
+
+	BufferedImageLoader loader = new BufferedImageLoader();
+	level = loader.loadImage("/game_level.png");
+	loadLevel(level);
 }
 
 
@@ -110,13 +116,19 @@ frames = 0;
 
 
 public void tick() {
+	
+	for(int i = 0;i < handler.object.size();i++) {
+		if(handler.object.get(i).getId() == ID.Player) {
+			camera.tick(handler.object.get(i));
+		}
+	}
+	
+	
 handler.tick();
 }
 
 
 public void render() {
-Color colorTemp;
-Font fontTemp;
 BufferStrategy bs = this.getBufferStrategy();
 if(bs == null) {
 this.createBufferStrategy(3);
@@ -125,14 +137,52 @@ return;
 
 
 Graphics g = bs.getDrawGraphics();
+Graphics2D g2d = (Graphics2D) g;
 ///////////////////////////////////
-g.setColor(colorTemp = new Color(20, 20, 20));
-g.fillRect(0, 0, w, l);
+
+g.setColor(Color.black);
+g.fillRect(0, 0, 1000, 563);
+
+
+g2d.translate(-camera.getX(),-camera.getY());
 
 handler.render(g);
+
+g2d.translate(-camera.getX(),-camera.getY());
+
+
 ///////////////////////////////////
 g.dispose();
 bs.show();
 }
+
+
+
+//level loader
+private void loadLevel(BufferedImage image) {
+	int w = image.getWidth();
+	int h = image.getHeight();
+	
+	for (int xx=0; xx<w;xx++) {
+		for(int yy=0;yy<h;yy++) {
+			int pixel = image.getRGB(xx,yy);
+			int red = (pixel >> 16) & 0xff;
+			int green = (pixel >> 8) & 0xff;
+			int blue = (pixel) & 0xff;
+			
+			if(red >= 200)
+				handler.addObject(new Block(xx*32, yy*32, ID.Block));
+			
+			if(blue == 255)
+				handler.addObject(new Player(xx*32, yy*32, ID.Player, handler));
+
+		}
+	}
+}
+
+
+
+
+
 }
 
