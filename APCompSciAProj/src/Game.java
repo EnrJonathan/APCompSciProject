@@ -175,6 +175,9 @@ private void loadLevel(BufferedImage image) {
 			
 			if(blue == 255)
 				handler.addObject(new Player(xx*32, yy*32, ID.Player, handler));
+			
+			if(green == 255)
+				handler.addObject(new Enemy(xx*32, yy*32, ID.Enemy, handler));
 
 		}
 	}
