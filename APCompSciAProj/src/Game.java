@@ -129,51 +129,6 @@ Graphics g = bs.getDrawGraphics();
 g.setColor(colorTemp = new Color(20, 20, 20));
 g.fillRect(0, 0, w, l);
 
-
-/////////////background
-g.setColor(colorTemp = new Color(52, 53, 54));
-///////////////////////
-
-
-/////////walls
-g.setColor(colorTemp = new Color(82, 11, 63));
-g.fillRect(-100, 0, 400,400 );
-g.fillRect(-100, 575, 400,375 );
-g.fillRect(450,450 , 50,75 );
-g.fillRect(450,375 , 10,225 );
-g.fillRect(0, 0, 750,100 );
-g.fillRect(700, 0, 50,175 );
-g.fillOval(500, 30, 250,250 );
-
-((Graphics2D) g).rotate(Math.toRadians(25));
-g.fillRect(950,-180,25,200);
-g.fillRect(930, -130, 20,125 );
-((Graphics2D) g).rotate(Math.toRadians(-50));
-g.fillRect(625,850,25,200);
-g.fillRect(605, 900, 20,125 );
-((Graphics2D) g).rotate(Math.toRadians(25));
-
-g.fillRect(650, 725, 225,125 );
-g.fillRect(1240, 350, 125,175 );
-g.fillRect(1220, 720, 125,225 );
-g.fillRect(1150, 0, 200,175 );
-g.fillRect(1100, 75, 200,75 );
-
-g.fillRect(860, 140,40,40 );
-g.fillRect(820, 60,30,30 );
-
-g.fillRect(0,0,6,l );
-g.fillRect(0, 0,w,6 );                //borders of map
-g.fillRect(w-10,0,50,l );  //-6 for mac
-g.fillRect(0,l-33,w,50 );   //-26  for mac
-/////////////
-
-
-
-////g.setFont(fontTemp = new Font("LucidaSans", Font.BOLD, 30));
-//g.setColor(colorTemp = new Color(255,255,255,255));
-//g.drawString("TAX FRAUD",w/2,l/2);
-
 handler.render(g);
 ///////////////////////////////////
 g.dispose();
