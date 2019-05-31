@@ -36,13 +36,13 @@ public class Enemy extends GameObject{
 			
 			if(tempObject.getId()==ID.Block) {
 				if(getBoundsBig().intersects(tempObject.getBounds())) {
-					x+=(velX*5)*-1;
-					y+=(velY*5)*-1;
+					x+=(velX*2)*-1;
+					y+=(velY*2)*-1;
 					velX*=-1;
 					velY*=-1;
 				}else if (choose == 0) {
-					velX = (r.nextInt(4 - -4)+ -4);
-					velY = (r.nextInt(4 - -4)+ -4);	
+					velX = (r.nextInt(2 - -2)+ -2);
+					velY = (r.nextInt(2 - -2)+ -2);	
 				}    
 			}
 
@@ -72,7 +72,7 @@ public class Enemy extends GameObject{
 	}
 	
 	public Rectangle getBoundsBig() {
-		return new Rectangle (x-10,y-10,40,40);
+		return new Rectangle (x-10,y-10,50,50);
 	}
 
 }

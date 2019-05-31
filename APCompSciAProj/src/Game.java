@@ -28,7 +28,7 @@ public int ammo = 10;
 public int hp = 100;
 
 //enemies left
-public int enemiesLeft = 15;
+public int enemiesLeft = 10;
 
 public static void main (String args[]) {
 new Game();
@@ -236,7 +236,6 @@ private void loadLevel(BufferedImage image) {
 			
 			if(green == 255 && red == 0 && blue == 0)
 				handler.addObject(new Enemy(xx*32, yy*32, ID.Enemy, handler,this, ss));
-
 		}
 	}
 }
