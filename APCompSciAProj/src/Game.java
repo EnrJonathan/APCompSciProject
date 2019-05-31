@@ -20,7 +20,7 @@ private BufferedImage level = null;
 private BufferedImage sprite_sheet = null;
 private BufferedImage floor = null;
 
-// ammount of ammo that the player starts with
+// amount of ammo that the player starts with
 public int ammo = 10;
 
 
