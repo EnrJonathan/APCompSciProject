@@ -1,5 +1,5 @@
 import java.awt.Graphics;
-
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 
@@ -7,7 +7,7 @@ import java.util.LinkedList;
 public class Handler {
 
 
-LinkedList<GameObject> object = new LinkedList<GameObject>();
+ArrayList<GameObject> object = new ArrayList<GameObject>();
 
 private boolean up = false, down = false, right = false, left = false;
 
@@ -24,12 +24,12 @@ tempObject.tick();
 }
 
 
-public LinkedList<GameObject> getObject() {
+public ArrayList<GameObject> getObject() {
 	return object;
 }
 
 
-public void setObject(LinkedList<GameObject> object) {
+public void setObject(ArrayList<GameObject> object) {
 	this.object = object;
 }
 

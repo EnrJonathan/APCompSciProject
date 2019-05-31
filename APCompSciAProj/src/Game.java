@@ -7,7 +7,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
-
 public class Game extends Canvas implements Runnable{
 
 private static final long serialVersionUID = 1L;
@@ -15,9 +14,21 @@ private boolean isRunning = false;
 private Thread thread;
 private Handler handler;
 private Camera camera;
-
+private SpriteSheet ss;
 
 private BufferedImage level = null;
+private BufferedImage sprite_sheet = null;
+private BufferedImage floor = null;
+
+// ammount of ammo that the player starts with
+public int ammo = 10;
+
+
+//health of player
+public int hp = 100;
+
+//enemies left
+public int enemiesLeft = 15;
 
 public static void main (String args[]) {
 new Game();
@@ -32,11 +43,18 @@ public Game() {
 	handler = new Handler();
 	camera = new Camera(0,0);
 	this.addKeyListener(new KeyInput(handler));
-	this.addMouseListener(new MouseInput(handler,camera));
 
 
 	BufferedImageLoader loader = new BufferedImageLoader();
 	level = loader.loadImage("/game_level.png");
+	sprite_sheet = loader.loadImage("/bullet.png");
+	
+	ss = new SpriteSheet(sprite_sheet);
+	floor = ss.grabImage(1,3,32,32);
+	
+	this.addMouseListener(new MouseInput(handler,camera,this,ss));
+
+	
 	loadLevel(level);
 }
 
@@ -140,16 +158,52 @@ Graphics g = bs.getDrawGraphics();
 Graphics2D g2d = (Graphics2D) g;
 ///////////////////////////////////
 
-g.setColor(Color.black);
-g.fillRect(0, 0, 1000, 563);
-
-
 g2d.translate(-camera.getX(),-camera.getY());
-
+for(int xx =0; xx<30*72;xx+=32) {
+	for(int yy =0; yy<30*72;yy+=32) {
+		g.drawImage(floor,xx,yy,null);
+	}
+}
 handler.render(g);
+g2d.translate(camera.getX(),camera.getY());
 
-g2d.translate(-camera.getX(),-camera.getY());
 
+//health bar
+g.setColor(Color.gray);
+g.fillRect(5, 5, 200, 32);
+g.setColor(Color.green);
+g.fillRect(5, 5, hp*2, 32);
+g.setColor(Color.black);
+g.drawRect(5, 5, 200, 32);
+
+
+//ammo display
+g.setColor(Color.white);
+g.drawString("Ammo: " + ammo,5,50);
+
+//shows # of enemies left
+g.setColor(Color.white);
+g.drawString("Zombies Left: " + enemiesLeft,5,75);
+
+//loosing screen
+if(hp <= 0) {
+		g.setColor(Color.red);
+		g.fillRect(0,0,1000,563);
+		g.setColor(Color.white);
+		Font f = new Font("Dialog", Font.PLAIN, 100);
+		g.setFont(f);
+		g.drawString("YOU ARE DEAD", 100, 300);
+	}
+
+//winning screen
+if(enemiesLeft == 0) {
+		g.setColor(Color.green);
+		g.fillRect(0,0,1000,563);
+		g.setColor(Color.white);
+		Font f = new Font("Dialog", Font.PLAIN, 100);
+		g.setFont(f);
+		g.drawString("YOU WON !!!", 200, 300);
+	}
 
 ///////////////////////////////////
 g.dispose();
@@ -170,14 +224,18 @@ private void loadLevel(BufferedImage image) {
 			int green = (pixel >> 8) & 0xff;
 			int blue = (pixel) & 0xff;
 			
-			if(red >= 200)
-				handler.addObject(new Block(xx*32, yy*32, ID.Block));
+			if(green == 255 && red == 0 && blue == 255)
+				handler.addObject(new Crate(xx*32, yy*32, ID.Crate,ss));
 			
-			if(blue == 255)
-				handler.addObject(new Player(xx*32, yy*32, ID.Player, handler));
+			if(red == 255)
+				handler.addObject(new Block(xx*32, yy*32, ID.Block,ss));
 			
-			if(green == 255)
-				handler.addObject(new Enemy(xx*32, yy*32, ID.Enemy, handler));
+			
+			if(green == 7 && red == 6 && blue == 255)
+				handler.addObject(new Player(xx*32, yy*32, ID.Player, handler,this,ss));
+			
+			if(green == 255 && red == 0 && blue == 0)
+				handler.addObject(new Enemy(xx*32, yy*32, ID.Enemy, handler,this, ss));
 
 		}
 	}
