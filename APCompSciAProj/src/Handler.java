@@ -93,6 +93,12 @@ object.add(tempObject);
 
 }
 
+public void setFirst(GameObject tempObject) {
+
+object.add(0,tempObject);
+
+}
+
 
 
 public void removeObject(GameObject tempObject) {
