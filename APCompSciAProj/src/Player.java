@@ -49,8 +49,28 @@ public class Player extends GameObject{
 			if(tempObject.getId() == ID.Block) {
 				
 				if (getBounds().intersects(tempObject.getBounds())) {
-					x += velX * -1;
-					y += velY * -1;
+					//x += velX * -1;
+					//y += velY * -1;
+					
+					
+					
+					x+=3;
+					if(getBounds().intersects(tempObject.getBounds())) {
+						x-=3;
+						y+=3;
+						if(getBounds().intersects(tempObject.getBounds())) {
+							y-=3;
+							x-=3;
+							if(getBounds().intersects(tempObject.getBounds())) {                //new wall collision fix
+								x+=3;
+								y-=3;
+								}
+							}
+						}
+					
+					
+					
+					
 				}	
 			}
 			
