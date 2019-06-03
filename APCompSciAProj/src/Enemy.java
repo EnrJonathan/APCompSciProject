@@ -33,23 +33,42 @@ public class Enemy extends GameObject{
 		for(int i = 0; i < handler.object.size();i++) {
 			GameObject tempObject = handler.object.get(i);
 			
+			///I MADE THIS PART OF THE CODEEEEEE///
+			
 			if(tempObject.getId()==ID.Block) {
 				if(getBoundsBig().intersects(tempObject.getBounds())) {
-					x+=(velX*5)*-1;
-					y+=(velY*5)*-1;                                                            //make it so that zombi follows player
-					velX*=-1;
-					velY*=-1;
+				//	x+=(velX*4)*-1;
+				//	y+=(velY*4)*-1;   
+				//	velX*=-1;                                                                     //old wall collision fix
+				//	velY*=-1;
+					
+					
+					x+=5;
+					if(getBoundsBig().intersects(tempObject.getBounds())) {
+						x-=5;
+						y+=5;
+						if(getBoundsBig().intersects(tempObject.getBounds())) {
+							y-=5;
+							x-=5;
+							if(getBoundsBig().intersects(tempObject.getBounds())) {                //new wall collision fix
+								x+=5;
+								y-=5;
+								}
+							}
+						}
+					
+					
+					
 				}
 			}else {
 				
-				///I MADE THIS PART OF THE CODEEEEEE///
 				GameObject tempObject1 = handler.object.get(0);						
 					
 				if (x < tempObject1.getX()) {
 					velX=(r.nextInt(3)+1);
 				}
 				if (x > tempObject1.getX()) {
-					velX=-1 * (r.nextInt(3)+1);					
+					velX=-1 * (r.nextInt(3)+1);					                         //make it so that zombie follows player
 					}
 				if (y < tempObject1.getY()) {
 					velY=(r.nextInt(3)+1);
