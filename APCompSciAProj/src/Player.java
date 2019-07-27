@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
@@ -38,7 +39,33 @@ public class Player extends GameObject{
 		if(handler.isLeft()) velX=-3;
 		else if(!handler.isRight()) velX=0;
 		
+		if(handler.isReload()) {
+			int temp = (game.mag - 12) * -1;
+			if(game.xtraAmmo >= temp) {
+				game.xtraAmmo -= temp;
+				game.mag += temp;
+			}else{
+				game.mag += game.xtraAmmo;
+				game.xtraAmmo = 0;
+			}
+		}
+		
 	}
+	
+	
+	/*
+	public void reload() {
+		int temp = (game.mag - 12) * -1;
+		if(game.xtraAmmo >= temp) {
+			game.xtraAmmo -= temp;
+			game.mag += temp;
+		}else{
+			game.mag += game.xtraAmmo;
+			game.xtraAmmo = 0;
+		}	
+
+	}
+	*/
 	
 	
 	private void collision() {
@@ -61,7 +88,7 @@ public class Player extends GameObject{
 						if(getBounds().intersects(tempObject.getBounds())) {
 							y-=3;
 							x-=3;
-							if(getBounds().intersects(tempObject.getBounds())) {                //new wall collision fix
+							if(getBounds().intersects(tempObject.getBounds())) {      //new wall collision fix
 								x+=3;
 								y-=3;
 								}
@@ -76,9 +103,11 @@ public class Player extends GameObject{
 			
 			if(tempObject.getId() == ID.Crate) {
 				
+				
 				if (getBounds().intersects(tempObject.getBounds())) {
-					game.ammo = 25;
-				}	
+					game.inRangeForAmmo = "Press E to buy Ammo";
+					game.xtraAmmo = 36;
+				}
 			}
 			
 			if(tempObject.getId() == ID.Enemy) {

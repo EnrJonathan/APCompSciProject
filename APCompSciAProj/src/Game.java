@@ -21,11 +21,20 @@ private BufferedImage sprite_sheet = null;
 private BufferedImage floor = null;
 
 // amount of ammo that the player starts with
-public int ammo = 10;
+public int mag = 12;
+public int xtraAmmo = 12;
+
+//within range to buy ammo
+public String inRangeForAmmo = "";
 
 
 //health of player
 public int hp = 100;
+
+
+//point system
+public int points = 0;
+
 
 //enemies left
 public int enemiesLeft = 15;
@@ -177,13 +186,22 @@ g.setColor(Color.black);
 g.drawRect(5, 5, 200, 32);
 
 
+//can buy ammo
+	g.setColor(Color.white);
+	g.drawString(inRangeForAmmo,450,281);
+
+//points display
+g.setColor(Color.white);
+g.drawString("Pts: " + points,5,50);
+
+
 //ammo display
 g.setColor(Color.white);
-g.drawString("Ammo: " + ammo,5,50);
+g.drawString("Ammo: " + mag + "/" + xtraAmmo,5,75);
 
 //shows # of enemies left
 g.setColor(Color.white);
-g.drawString("Zombies Left: " + enemiesLeft,5,75);
+g.drawString("Zombies Left: " + enemiesLeft,5,100);
 
 //loosing screen
 if(hp <= 0) {

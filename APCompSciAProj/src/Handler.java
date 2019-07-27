@@ -2,14 +2,14 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-
-
 public class Handler {
-
-
+	
+	
 ArrayList<GameObject> object = new ArrayList<GameObject>();
 
 private boolean up = false, down = false, right = false, left = false;
+
+private boolean r = false;
 
 public void tick() {
 
@@ -104,8 +104,19 @@ object.add(0,tempObject);
 public void removeObject(GameObject tempObject) {
 
 object.remove(tempObject);
-
 }
+
+
+
+public boolean isReload() {
+	return r;
+}
+
+
+public void setReload(boolean r) {
+	this.r = r;
+}
+
 
 
 }
