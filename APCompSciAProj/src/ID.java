@@ -6,4 +6,7 @@ public enum ID {
 	Bullet(),
 	Enemy(),
 	Block(),
+	Escape(),
+	Spawner(),
+	MedKit(),
 }

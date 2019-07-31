@@ -78,8 +78,8 @@ public class Enemy extends GameObject{
 	        		                                                 
 			if(tempObject.getId()==ID.Bullet) {
 				if(getBounds().intersects(tempObject.getBounds())) {
-				hp-=25;                                                  //damage 4 zombies
-				game.points += 10;                            //points added per shot
+				hp-=50;                                                  //damage 4 zombies
+				game.points += 20;                            //points added per shot
 				handler.removeObject(tempObject);
 				}
 			}		
@@ -87,6 +87,11 @@ public class Enemy extends GameObject{
 		if(hp <= 0) {
 			handler.removeObject(this);
 		game.enemiesLeft--;
+		}
+		
+		if(game.win || game.lose) {
+			handler.removeObject(this);
+		game.enemiesLeft=21;
 		}
 
 	}

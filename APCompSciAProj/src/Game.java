@@ -24,9 +24,12 @@ private BufferedImage floor = null;
 public int mag = 12;
 public int xtraAmmo = 12;
 
-// range to buy ammo
-public String inRangeForAmmo = "";
+// range to interact
+public String inRange = "";
 
+//loosing and winning switch
+public boolean win = false;
+public boolean lose = false;
 
 
 //health of player
@@ -45,7 +48,7 @@ public double myTimer = 0;
 
 
 //enemies left
-public int enemiesLeft = 15;
+public int enemiesLeft = 0;
 
 public static void main (String args[]) {
 new Game();
@@ -130,8 +133,11 @@ public void run() {
 
   delta--;
   
-  myTimer += 0.015;                                                        //timer counter for spawners
-
+  
+  
+  if(myTimer >= 9.5) myTimer = 0.0;
+else   myTimer += 0.015;                                                        //timer counter for spawners
+  
 
   }
 
@@ -201,11 +207,11 @@ g.drawRect(5, 5, 200, 32);
 
 //can buy ammo
 	g.setColor(Color.white);
-	g.drawString(inRangeForAmmo,420,281);
+	g.drawString(inRange,420,281);
 	
-	//timer display
-		g.setColor(Color.white);
-		g.drawString("Time: " + myTimer,420,100);
+//timer display
+		//g.setColor(Color.white);
+		//g.drawString("Time: " + myTimer,420,100);
 
 //points display
 g.setColor(Color.white);
@@ -217,27 +223,34 @@ g.setColor(Color.white);
 g.drawString("Ammo: " + mag + "/" + xtraAmmo,5,75);
 
 //shows # of enemies left
-g.setColor(Color.white);
-g.drawString("Zombies Left: " + enemiesLeft,5,100);
+//g.setColor(Color.white);
+//g.drawString("Zombies Left: " + enemiesLeft,5,100);
 
 //loosing screen
-if(hp <= 0) {
+if(lose) {
 		g.setColor(Color.red);
 		g.fillRect(0,0,1000,563);
 		g.setColor(Color.white);
+		g.drawString("Press the \"Space\" key to restart", 400, 400);
 		Font f = new Font("Dialog", Font.PLAIN, 100);
 		g.setFont(f);
 		g.drawString("YOU ARE DEAD", 100, 300);
+		hp = 100;
+		xtraAmmo=0;
+		mag=0;
 	}
-
 //winning screen
-if(enemiesLeft == 0) {
+if(win) {
 		g.setColor(Color.green);
 		g.fillRect(0,0,1000,563);
 		g.setColor(Color.white);
+		g.drawString("Press the \"Space\" key to restart", 400, 400);
 		Font f = new Font("Dialog", Font.PLAIN, 100);
 		g.setFont(f);
 		g.drawString("YOU WON !!!", 200, 300);
+		xtraAmmo=0;
+		hp = 100;
+		mag=0;
 	}
 
 ///////////////////////////////////
@@ -262,15 +275,22 @@ private void loadLevel(BufferedImage image) {
 			if(green == 255 && red == 0 && blue == 255)
 				handler.addObject(new Crate(xx*32, yy*32, ID.Crate,ss));
 			
-			if(red == 255)
+			if(green == 0 && red == 255 && blue == 0)
+				handler.addObject(new MedKit(xx*32, yy*32, ID.MedKit,ss));
+			
+			if(green == 255 && red == 243 && blue == 0)
+				handler.addObject(new Spawner(xx*32, yy*32, ID.Spawner, handler,this,ss));
+			
+			if(green == 0 && red == 255 && blue == 249)
+				handler.addObject(new Escape(xx*32, yy*32, ID.Escape,ss));
+			
+			if(red == 0 && green == 255 && blue == 0)
 				handler.addObject(new Block(xx*32, yy*32, ID.Block,ss));
 			
 			
 			if(green == 7 && red == 6 && blue == 255)
 				handler.setFirst(new Player(xx*32, yy*32, ID.Player, handler,this,ss));
-			
-			if(green == 255 && red == 0 && blue == 0)
-				handler.addObject(new Enemy(xx*32, yy*32, ID.Enemy, handler,this, ss));
+
 		}
 	}
 }

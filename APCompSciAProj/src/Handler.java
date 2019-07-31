@@ -13,6 +13,8 @@ private boolean r = false;
 
 private boolean i = false;
 
+private boolean restart = false;
+
 public void tick() {
 
 for(int i = 0; i < object.size(); i++) {
@@ -127,6 +129,15 @@ public boolean isInteract() {
 
 public void setInteract(boolean i) {
 	this.i = i;
+}
+
+public boolean isReset() {
+	return restart;
+}
+
+
+public void setReset(boolean restart) {
+	this.restart = restart;
 }
 
 
