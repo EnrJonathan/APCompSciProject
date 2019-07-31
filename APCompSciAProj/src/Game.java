@@ -24,8 +24,9 @@ private BufferedImage floor = null;
 public int mag = 12;
 public int xtraAmmo = 12;
 
-//within range to buy ammo
+// range to buy ammo
 public String inRangeForAmmo = "";
+
 
 
 //health of player
