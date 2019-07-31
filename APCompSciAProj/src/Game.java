@@ -36,6 +36,13 @@ public int hp = 100;
 public int points = 0;
 
 
+////inGameTimer
+public double myTimer = 0;
+
+
+
+
+
 //enemies left
 public int enemiesLeft = 15;
 
@@ -104,6 +111,7 @@ public void run() {
   long timer = System.currentTimeMillis();
 
   int frames = 0;
+  
 
   while (isRunning) {
 
@@ -120,6 +128,9 @@ public void run() {
   //updates++;
 
   delta--;
+  
+  myTimer += 0.015;                                                        //timer counter for spawners
+
 
   }
 
@@ -132,6 +143,7 @@ public void run() {
 timer += 1000;
 
 frames = 0;
+
 
   }
 
@@ -188,7 +200,11 @@ g.drawRect(5, 5, 200, 32);
 
 //can buy ammo
 	g.setColor(Color.white);
-	g.drawString(inRangeForAmmo,450,281);
+	g.drawString(inRangeForAmmo,420,281);
+	
+	//timer display
+		g.setColor(Color.white);
+		g.drawString("Time: " + myTimer,420,100);
 
 //points display
 g.setColor(Color.white);

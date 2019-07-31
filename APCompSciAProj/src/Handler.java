@@ -11,6 +11,8 @@ private boolean up = false, down = false, right = false, left = false;
 
 private boolean r = false;
 
+private boolean i = false;
+
 public void tick() {
 
 for(int i = 0; i < object.size(); i++) {
@@ -117,6 +119,15 @@ public void setReload(boolean r) {
 	this.r = r;
 }
 
+
+public boolean isInteract() {
+	return i;
+}
+
+
+public void setInteract(boolean i) {
+	this.i = i;
+}
 
 
 }

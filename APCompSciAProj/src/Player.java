@@ -27,18 +27,32 @@ public class Player extends GameObject{
 		
 		
 		//movement
-		if(handler.isUp()) velY=-3;
+		if(handler.isUp()) {
+			game.inRangeForAmmo = "";
+			velY=-3;
+		}
 		else if(!handler.isDown()) velY=0;
 		
-		if(handler.isDown()) velY=3;
-		else if(!handler.isUp()) velY=0;
+		if(handler.isDown()) {
+			game.inRangeForAmmo = "";
+			velY=3;
+		}
+		else if(!handler.isUp())velY=0;
 		
-		if(handler.isRight()) velX=3;
+		if(handler.isRight()) {
+			game.inRangeForAmmo = "";
+			velX=3;
+		}
 		else if(!handler.isLeft()) velX=0;
 		
-		if(handler.isLeft()) velX=-3;
+		if(handler.isLeft()) {
+			game.inRangeForAmmo = "";
+			velX=-3;
+		}
 		else if(!handler.isRight()) velX=0;
 		
+		
+		//reloading
 		if(handler.isReload()) {
 			int temp = (game.mag - 12) * -1;
 			if(game.xtraAmmo >= temp) {
@@ -50,22 +64,27 @@ public class Player extends GameObject{
 			}
 		}
 		
-	}
-	
-	
-	/*
-	public void reload() {
-		int temp = (game.mag - 12) * -1;
-		if(game.xtraAmmo >= temp) {
-			game.xtraAmmo -= temp;
-			game.mag += temp;
-		}else{
-			game.mag += game.xtraAmmo;
-			game.xtraAmmo = 0;
-		}	
+		
+		//interaction for ammo or escape
+		if(handler.isInteract()) {               // for ammo
+			if(game.inRangeForAmmo == "Press E to buy Ammo (Cost:150)") {
+				if(game.points >= 150) {
+					game.xtraAmmo = 36;
+					game.points -= 150;
+				}
+				
+			}else if(true) {              // for escape
+				
+			}else {
+				
+			}
 
+		}
+		
 	}
-	*/
+	
+	
+	
 	
 	
 	private void collision() {
@@ -102,14 +121,14 @@ public class Player extends GameObject{
 			}
 			
 			if(tempObject.getId() == ID.Crate) {
-				
-				
-				if (getBounds().intersects(tempObject.getBounds())) {
-					game.inRangeForAmmo = "Press E to buy Ammo";
-					game.xtraAmmo = 36;
+				if (getBounds().intersects(tempObject.getBounds()) && game.xtraAmmo < 36) {
+					game.inRangeForAmmo = "Press E to buy Ammo (Cost:150)";
+				}
+				if(game.xtraAmmo == 36) {
+					game.inRangeForAmmo = "";
 				}
 			}
-			
+				
 			if(tempObject.getId() == ID.Enemy) {
 				
 				if (getBounds().intersects(tempObject.getBounds())) {
