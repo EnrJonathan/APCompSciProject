@@ -9,4 +9,5 @@ public enum ID {
 	Escape(),
 	Spawner(),
 	MedKit(),
+	Chairs();
 }
