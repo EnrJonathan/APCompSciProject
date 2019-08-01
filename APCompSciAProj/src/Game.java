@@ -37,7 +37,7 @@ public int hp = 100;
 
 
 //point system
-public int points = 0;
+public int points = 990;
 
 
 ////inGameTimer
@@ -251,7 +251,7 @@ if(win) {
 		xtraAmmo=0;
 		hp = 100;
 		mag=0;
-	}
+		}
 
 ///////////////////////////////////
 g.dispose();

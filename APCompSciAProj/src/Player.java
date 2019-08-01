@@ -77,8 +77,6 @@ public class Player extends GameObject{
 				game.enemiesLeft = 0;
 				game.myTimer = 0.0;
 				game.inRange = "";
-				x = 160;
-				y = 128;
 				}
 		
 		
@@ -95,6 +93,8 @@ public class Player extends GameObject{
 				game.inRange = "";
 				game.points -= 1000;
 				game.win = true;
+				x = 160;
+				y = 128;
 				}
 			}else if(game.inRange == "Press E to heal yourself(Cost:200)"){                          //for med-kits
 				if(game.points >= 200  && game.hp < 100) {
@@ -168,9 +168,11 @@ public class Player extends GameObject{
 			if(tempObject.getId() == ID.Enemy) {
 				
 				if (getBounds().intersects(tempObject.getBounds())) {
-					game.hp-=4;
+					game.hp-=2;                                         //damage to player
 					if(game.hp <= 0) {
 						game.lose = true;
+						x = 160;
+						y = 128;
 					}
 				}	
 			}
