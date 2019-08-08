@@ -272,6 +272,9 @@ private void loadLevel(BufferedImage image) {
 			int green = (pixel >> 8) & 0xff;
 			int blue = (pixel) & 0xff;
 			
+			if(green == 7 && red == 6 && blue == 255)
+				handler.setFirst(new Player(xx*32, yy*32, ID.Player, handler,this,ss));
+			
 			if(green == 255 && red == 0 && blue == 255)
 				handler.addObject(new Crate(xx*32, yy*32, ID.Crate,ss));
 			
@@ -290,9 +293,6 @@ private void loadLevel(BufferedImage image) {
 			if(red == 245 && green == 0 && blue == 255)
 				handler.addObject(new Chairs(xx*32, yy*32, ID.Chairs,ss));
 			
-			
-			if(green == 7 && red == 6 && blue == 255)
-				handler.setFirst(new Player(xx*32, yy*32, ID.Player, handler,this,ss));
 
 		}
 	}
