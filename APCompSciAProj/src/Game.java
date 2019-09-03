@@ -24,7 +24,7 @@ private BufferedImage floor = null;
 public int multy = 1;
 
 //speed multiplier
-public int speedBoost = 0;  //max shoul be 3
+public int speedBoost = 0;  //max should be 2
 
 // amount of ammo that the player starts with
 public int mag = 12;

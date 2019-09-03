@@ -70,6 +70,8 @@ public class Player extends GameObject{
 				if(handler.isReset() && (game.win == true||game.lose == true)) {
 				x = 160;
 				y = 128;
+				game.multy = 1;
+				game.speedBoost = 0;
 				game.wave = 1;
 				game.hp = 100;
 				game.points = 0;

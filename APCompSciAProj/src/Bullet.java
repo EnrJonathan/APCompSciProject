@@ -37,11 +37,11 @@ public class Bullet extends GameObject{
 
 	public void render(Graphics g) {
 		g.setColor(Color.yellow);
-		g.fillOval(x, y, 2 + (2 * game.multy), 2 + (2 * game.multy));
+		g.fillOval(x, y, 5 + game.multy, 5 + game.multy);
 	}
 
 	public Rectangle getBounds() {
-		return new Rectangle (x,y,2 + (2 * game.multy),2 + (2 * game.multy));
+		return new Rectangle (x,y,5 + game.multy,5 + game.multy);
 	}
 
 }
