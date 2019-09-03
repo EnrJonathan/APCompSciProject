@@ -20,10 +20,11 @@ private BufferedImage level = null;
 private BufferedImage sprite_sheet = null;
 private BufferedImage floor = null;
 
-//damage multiplyer
+//damage multiplier
 public int multy = 1;
 
-
+//speed multiplier
+public int speedBoost = 0;  //max shoul be 3
 
 // amount of ammo that the player starts with
 public int mag = 12;
@@ -31,6 +32,10 @@ public int xtraAmmo = 12;
 
 // range to interact
 public String inRange = "";
+
+//makes it so that you can only buy the perk once per round
+public int ifBoughtDamagePerk = 0;
+
 
 //loosing and winning switch
 public boolean win = false;
@@ -193,6 +198,8 @@ Graphics g = bs.getDrawGraphics();
 Graphics2D g2d = (Graphics2D) g;
 Font waveFont = new Font(Font.SANS_SERIF, Font.PLAIN, 50);
 Font ammoFont = new Font(Font.SANS_SERIF, Font.PLAIN, 30);
+Font multyOrBoostFont = new Font(Font.SANS_SERIF, Font.PLAIN, 15);
+
 Font pointsFont = new Font(Font.SANS_SERIF, Font.PLAIN, 20);
 ///////////////////////////////////
 
@@ -229,6 +236,29 @@ g.setFont(ammoFont);
 g.drawString("Pts: " + points,5,475);
 g.setColor(Color.white);
 
+
+//damage multy display
+if(multy > 1 && multy < 10) {
+g.setColor(Color.white);
+g.setFont(multyOrBoostFont);
+g.drawString("Damage Multiplier: x" + multy,5,425);
+g.setColor(Color.white);
+}
+if(multy >= 10) {
+	g.setColor(Color.white);
+	g.setFont(multyOrBoostFont);
+	g.drawString("Damage Multiplier: x" + multy + "(MAX)",5,425);
+	g.setColor(Color.white);
+}
+
+
+//speed boost display
+if(speedBoost > 0) {
+g.setColor(Color.white);
+g.setFont(multyOrBoostFont);
+g.drawString("Speed Booster: +" + (speedBoost * 50) + "%",5,400);
+g.setColor(Color.white);
+}
 
 //wave display
 g.setColor(Color.white);
@@ -314,7 +344,7 @@ private void loadLevel(BufferedImage image) {
 				handler.addObject(new MedKit(xx*32, yy*32, ID.MedKit,ss));
 			
 			if(green == 91 && red ==12 && blue == 172)                                
-				handler.addObject(new MedKit(xx*32, yy*32, ID.DamagePerk,ss));            
+				handler.addObject(new DamagePerk(xx*32, yy*32, ID.DamagePerk,ss));            
 			
 			if(green == 255 && red == 243 && blue == 0)
 				handler.addObject(new Spawner(xx*32, yy*32, ID.Spawner, handler,this,ss));

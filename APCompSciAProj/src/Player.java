@@ -30,25 +30,25 @@ public class Player extends GameObject{
 		if (game.win == false && game.lose == false) {
 		if(handler.isUp()) {
 			game.inRange = "";
-			velY=-3;
+			velY=-2 - game.speedBoost;
 		}
 		else if(!handler.isDown()) velY=0;
 		
 		if(handler.isDown()) {
 			game.inRange = "";
-			velY=3;
+			velY=2 + game.speedBoost;
 		}
 		else if(!handler.isUp())velY=0;
 		
 		if(handler.isRight()) {
 			game.inRange = "";
-			velX=3;
+			velX=2 + game.speedBoost;
 		}
 		else if(!handler.isLeft()) velX=0;
 		
 		if(handler.isLeft()) {
 			game.inRange = "";
-			velX=-3;
+			velX=-2 - game.speedBoost;
 		}
 		else if(!handler.isRight()) velX=0;
 	}
@@ -100,14 +100,16 @@ public class Player extends GameObject{
 				x = 160;
 				y = 128;
 				}
+			}else if(game.inRange == "Press E to buy Damage Perk (Cost:1000)"){                          //for damage perk
+				if(game.points >= 1000 && !(game.ifBoughtDamagePerk == game.wave)) {
+					game.multy++;
+					game.points-=1000;
+					game.ifBoughtDamagePerk = game.wave;
+					}
 			}else if(game.inRange == "Press E to heal yourself(Cost:200)"){                          //for med-kits
 				if(game.points >= 200  && game.hp < 100) {
 					game.hp = 100;
 					game.points -= 200;
-					}
-			}else if(game.inRange == "Press E to buy Damage Perk (Cost:1000)"){                          //for damage perk
-				if(game.points >= 1000) {
-					game.multy++;
 					}
 			}
 			
@@ -150,16 +152,16 @@ public class Player extends GameObject{
 					
 					
 					
-					x+=3;
+					x+=2 + game.speedBoost;
 					if(getBounds().intersects(tempObject.getBounds())) {
-						x-=3;
-						y+=3;
+						x-=2 + game.speedBoost;
+						y+=2 + game.speedBoost;
 						if(getBounds().intersects(tempObject.getBounds())) {
-							y-=3;
-							x-=3;
+							y-=2 + game.speedBoost;
+							x-=2 + game.speedBoost;
 							if(getBounds().intersects(tempObject.getBounds())) {      //new wall collision fix
-								x+=3;
-								y-=3;
+								x+=2 + game.speedBoost;
+								y-=2 + game.speedBoost;
 								}
 							}
 						}
@@ -192,7 +194,16 @@ public class Player extends GameObject{
 			}
 			if(tempObject.getId() == ID.DamagePerk) {
 				if (getBounds().intersects(tempObject.getBounds())) {
-					game.inRange = "Press E to buy Damage Perk (Cost:1000))";
+					if(game.ifBoughtDamagePerk == game.wave) {
+						game.inRange = "Out Of order till next round";
+					}else{
+						if(game.multy == 10) {
+							game.inRange = "You've reached max damage";
+						}else {
+						game.inRange = "Press E to buy Damage Perk (Cost:1000)";
+						}
+
+					}
 				}
 			}
 				
