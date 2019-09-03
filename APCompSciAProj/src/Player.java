@@ -107,9 +107,7 @@ public class Player extends GameObject{
 					}
 			}else if(game.inRange == "Press E to buy Damage Perk (Cost:1000)"){                          //for damage perk
 				if(game.points >= 1000) {
-					
-					//add stuff here
-					
+					game.multy++;
 					}
 			}
 			

@@ -11,7 +11,7 @@ public class DamagePerk extends GameObject {
 	public DamagePerk(int x, int y, ID id,SpriteSheet ss) {
 		super(x, y, id,ss);
 		
-		damagePerk_image = ss.grabImage(2, 2, 20, 20);
+		damagePerk_image = ss.grabImage(3, 3, 20, 20);
 
 	}
 

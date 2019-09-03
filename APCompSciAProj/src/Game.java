@@ -21,7 +21,6 @@ private BufferedImage sprite_sheet = null;
 private BufferedImage floor = null;
 
 //damage multiplyer
-
 public int multy = 1;
 
 
@@ -314,8 +313,8 @@ private void loadLevel(BufferedImage image) {
 			if(green == 0 && red == 255 && blue == 0)
 				handler.addObject(new MedKit(xx*32, yy*32, ID.MedKit,ss));
 			
-			if(green == 0 && red ==0 && blue == 0)                                //change colors so that they match
-				handler.addObject(new MedKit(xx*32, yy*32, ID.DamagePerk,ss));              //use medibang to give it a color
+			if(green == 91 && red ==12 && blue == 172)                                
+				handler.addObject(new MedKit(xx*32, yy*32, ID.DamagePerk,ss));            
 			
 			if(green == 255 && red == 243 && blue == 0)
 				handler.addObject(new Spawner(xx*32, yy*32, ID.Spawner, handler,this,ss));
