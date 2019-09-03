@@ -11,18 +11,22 @@ public class Enemy extends GameObject{
 	
 	
 	private Handler handler;
-	int hp = 100;
 	Game game;
 	Random r = new Random();
 	private BufferedImage enemy_image;
+	int wave;
+	int hp;
 
-
+	
 	public Enemy(int x, int y, ID id, Handler handler,Game game,SpriteSheet ss) {
 		super(x, y, id,ss);
 		this.handler = handler;
 		this.game=game;		
 		enemy_image = ss.grabImage(2, 1, 20, 20);
+		wave = game.wave;
+		hp = 50 + (wave * 50);
 	}
+
 	
 
 	public void tick() {
@@ -32,7 +36,7 @@ public class Enemy extends GameObject{
 		
 		for(int i = 0; i < handler.object.size();i++) {
 			GameObject tempObject = handler.object.get(i);
-			
+
 			
 			if(tempObject.getId()==ID.Block|| tempObject.getId()==ID.Chairs) {
 				if(getBounds().intersects(tempObject.getBounds())) {
@@ -58,7 +62,8 @@ public class Enemy extends GameObject{
 				}
 			}else {
 				
-				GameObject tempObject1 = handler.object.get(0);						
+				GameObject tempObject1 = handler.object.get(0);		
+				
 					
 				if (x < tempObject1.getX()) {
 					velX=(r.nextInt(3)+1);
@@ -72,14 +77,15 @@ public class Enemy extends GameObject{
 				if (y > tempObject1.getY()) {
 					velY=-1 * (r.nextInt(3)+1);					
 				}		
-			}     
+			}  
+			
 
 			
 	        		                                                 
 			if(tempObject.getId()==ID.Bullet) {
 				if(getBounds().intersects(tempObject.getBounds())) {
-				hp-=34;                                                  //damage 4 zombies
-				game.points += 20;                            //points added per shot
+				hp-=50 * game.multy;                                                  //damage 4 zombies
+				game.points += 15;                                                 //points added per shot
 				handler.removeObject(tempObject);
 				}
 			}		
@@ -87,6 +93,7 @@ public class Enemy extends GameObject{
 		if(hp <= 0) {
 			handler.removeObject(this);
 		game.enemiesLeft--;
+		game.zombiesKilled++;
 		}
 		
 		if(game.win || game.lose) {

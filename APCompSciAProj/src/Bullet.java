@@ -5,10 +5,13 @@ import java.awt.Rectangle;
 public class Bullet extends GameObject{
 	
 	private Handler handler;
+	Game game;
 
-	public Bullet(int x, int y, ID id, Handler handler,int mx,int my,SpriteSheet ss) {
+	public Bullet(int x, int y, ID id, Handler handler,int mx,int my,SpriteSheet ss,Game game) {
 		super(x, y, id,ss);
 		this.handler=handler;
+		this.game = game;
+		
 		
 		velX = (mx-x)/10;
 		velY = (my-y)/10;
@@ -34,11 +37,11 @@ public class Bullet extends GameObject{
 
 	public void render(Graphics g) {
 		g.setColor(Color.yellow);
-		g.fillOval(x, y, 8, 8);
+		g.fillOval(x, y, 2 + (2 * game.multy), 2 + (2 * game.multy));
 	}
 
 	public Rectangle getBounds() {
-		return new Rectangle (x,y,8,8);
+		return new Rectangle (x,y,2 + (2 * game.multy),2 + (2 * game.multy));
 	}
 
 }

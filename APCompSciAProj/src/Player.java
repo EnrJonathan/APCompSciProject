@@ -68,6 +68,9 @@ public class Player extends GameObject{
 		
 		//restarting
 				if(handler.isReset() && (game.win == true||game.lose == true)) {
+				x = 160;
+				y = 128;
+				game.wave = 1;
 				game.hp = 100;
 				game.points = 0;
 				game.lose = false;
@@ -75,6 +78,7 @@ public class Player extends GameObject{
 				game.mag = 12;
 				game.xtraAmmo = 12;
 				game.enemiesLeft = 0;
+				game.zombiesKilled = 0;
 				game.myTimer = 0.0;
 				game.inRange = "";
 				}
@@ -88,10 +92,10 @@ public class Player extends GameObject{
 					game.points -= 150;
 				}
 				
-			}else if(game.inRange == "Press E to buy your Freedom (Cost:1000)") {              // for escape later on
-				if(game.points >= 1000) {
+			}else if(game.inRange == "Press E to buy your Freedom (Cost:5000)") {              // for escape later on
+				if(game.points >= 5000) {
 				game.inRange = "";
-				game.points -= 1000;
+				game.points -= 5000;
 				game.win = true;
 				x = 160;
 				y = 128;
@@ -101,9 +105,33 @@ public class Player extends GameObject{
 					game.hp = 100;
 					game.points -= 200;
 					}
+			}else if(game.inRange == "Press E to buy Damage Perk (Cost:1000)"){                          //for damage perk
+				if(game.points >= 1000) {
+					
+					//add stuff here
+					
+					}
 			}
-
+			
 		}
+		
+		
+		
+		
+		
+		if(game.zombiesKilled >= (game.wave*5) && game.enemiesLeft == 0) {
+			game.zombiesKilled = 0;                                               //waves
+			game.wave++;
+			
+			
+		}
+		
+		
+		
+		
+		
+		
+
 		
 	}
 	
@@ -162,6 +190,11 @@ public class Player extends GameObject{
 			if(tempObject.getId() == ID.MedKit) {
 				if (getBounds().intersects(tempObject.getBounds())) {
 					game.inRange = "Press E to heal yourself(Cost:200)";
+				}
+			}
+			if(tempObject.getId() == ID.DamagePerk) {
+				if (getBounds().intersects(tempObject.getBounds())) {
+					game.inRange = "Press E to buy Damage Perk (Cost:1000))";
 				}
 			}
 				

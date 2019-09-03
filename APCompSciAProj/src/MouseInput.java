@@ -26,7 +26,7 @@ public class MouseInput extends MouseAdapter{
 			GameObject tempObject = handler.object.get(i);
 			
 			if(tempObject.getId()==ID.Player && game.mag>=1) {
-				handler.addObject(new Bullet(tempObject.getX()+5, tempObject.getY()+5,ID.Bullet,handler,mx,my,ss));
+				handler.addObject(new Bullet(tempObject.getX()+5, tempObject.getY()+5,ID.Bullet,handler,mx,my,ss,game));
 				game.mag--;
 			}
 		}

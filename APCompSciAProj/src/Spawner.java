@@ -24,12 +24,12 @@ public class Spawner extends GameObject {
 		for(int i = 0; i < handler.object.size();i++) {
 			GameObject tempObject = handler.object.get(i);
 			
-			if(tempObject.getId()==ID.Spawner && game.myTimer == 4.5 && game.enemiesLeft < 20) {
+			if(tempObject.getId()==ID.Spawner && game.myTimer == 4.5 && game.enemiesLeft < 20 && game.zombiesKilled < (game.wave*5)) {
 				handler.addObject(new Enemy(tempObject.x+5, tempObject.y+5,ID.Enemy,handler,game,ss));
 				game.enemiesLeft++;
 			}
 
-			if(tempObject.getId()==ID.Spawner && game.myTimer == 9.0 && game.enemiesLeft < 20) {
+			if(tempObject.getId()==ID.Spawner && game.myTimer == 9.0 && game.enemiesLeft < 20 && game.zombiesKilled < (game.wave*5)) {
 				handler.addObject(new Enemy(tempObject.x+5, tempObject.y+5,ID.Enemy,handler,game,ss));
 				game.enemiesLeft++;
 			}

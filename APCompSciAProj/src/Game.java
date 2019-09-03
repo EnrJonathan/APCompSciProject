@@ -20,6 +20,12 @@ private BufferedImage level = null;
 private BufferedImage sprite_sheet = null;
 private BufferedImage floor = null;
 
+//damage multiplyer
+
+public int multy = 1;
+
+
+
 // amount of ammo that the player starts with
 public int mag = 12;
 public int xtraAmmo = 12;
@@ -49,6 +55,8 @@ public double myTimer = 0;
 
 //enemies left
 public int enemiesLeft = 0;
+public int wave = 1;
+public int zombiesKilled = 0;    // when it reaches 20, start new wave
 
 public static void main (String args[]) {
 new Game();
@@ -184,6 +192,9 @@ return;
 
 Graphics g = bs.getDrawGraphics();
 Graphics2D g2d = (Graphics2D) g;
+Font waveFont = new Font(Font.SANS_SERIF, Font.PLAIN, 50);
+Font ammoFont = new Font(Font.SANS_SERIF, Font.PLAIN, 30);
+Font pointsFont = new Font(Font.SANS_SERIF, Font.PLAIN, 20);
 ///////////////////////////////////
 
 g2d.translate(-camera.getX(),-camera.getY());
@@ -215,16 +226,31 @@ g.drawRect(5, 5, 200, 32);
 
 //points display
 g.setColor(Color.white);
-g.drawString("Pts: " + points,5,50);
+g.setFont(ammoFont);
+g.drawString("Pts: " + points,5,475);
+g.setColor(Color.white);
+
+
+//wave display
+g.setColor(Color.white);
+g.setFont(waveFont);
+g.drawString("Wave: " + wave,5,525);
+g.setColor(Color.white);
+
+
 
 
 //ammo display
 g.setColor(Color.white);
-g.drawString("Ammo: " + mag + "/" + xtraAmmo,5,75);
+g.setFont(ammoFont);
+g.drawString("Ammo: "+ mag + "/" + xtraAmmo,770,520);
+g.setColor(Color.white);
 
 //shows # of enemies left
 //g.setColor(Color.white);
-//g.drawString("Zombies Left: " + enemiesLeft,5,100);
+//g.drawString("Zombies Left: " + enemiesLeft,5,200);
+//g.drawString("Zombies Killed: " + zombiesKilled,5,250);
+
 
 //loosing screen
 if(lose) {
@@ -253,6 +279,13 @@ if(win) {
 		mag=0;
 		}
 
+
+//no ammo display
+if(mag==0 && xtraAmmo==0 && win == false && lose == false) {
+	g.setColor(Color.red);
+	g.drawString("No Ammo",500,300);
+}
+
 ///////////////////////////////////
 g.dispose();
 bs.show();
@@ -280,6 +313,9 @@ private void loadLevel(BufferedImage image) {
 			
 			if(green == 0 && red == 255 && blue == 0)
 				handler.addObject(new MedKit(xx*32, yy*32, ID.MedKit,ss));
+			
+			if(green == 0 && red ==0 && blue == 0)                                //change colors so that they match
+				handler.addObject(new MedKit(xx*32, yy*32, ID.DamagePerk,ss));              //use medibang to give it a color
 			
 			if(green == 255 && red == 243 && blue == 0)
 				handler.addObject(new Spawner(xx*32, yy*32, ID.Spawner, handler,this,ss));
