@@ -8,6 +8,7 @@ public class Player extends GameObject{
 
 	Handler handler;
 	Game game;
+	double knifeTime;
 	
 	private BufferedImage player_image;
 	
@@ -66,6 +67,23 @@ public class Player extends GameObject{
 			}
 		}
 		
+		//knifing
+				if(handler.isKnife()) {
+				 knifeTime = game.myTimer;
+					for(int i = 0; i < handler.object.size();i++) {
+						GameObject tempObject = handler.object.get(i);
+						
+						if(tempObject.getId()==ID.Player) {
+							handler.addObject(new Knife(tempObject.getX()-20, tempObject.getY()-20,ID.Knife,handler,x,y,ss,game));
+						}
+						if(tempObject.getId()==ID.Knife) {
+							                                    //add some sort of timer to remove the knife
+							handler.removeObject(tempObject);
+
+						}
+					}                               
+				}
+		
 		//restarting
 				if(handler.isReset() && (game.win == true||game.lose == true)) {
 				x = 160;
@@ -84,8 +102,8 @@ public class Player extends GameObject{
 				game.myTimer = 0.0;
 				game.inRange = "";
 				}
-		
-		
+				
+				
 		//interaction for ammo or escape
 		if(handler.isInteract()) {                                                     // for ammo
 			if(game.inRange == "Press E to buy Ammo (Cost:150)") {
@@ -93,7 +111,6 @@ public class Player extends GameObject{
 					game.xtraAmmo = 36;
 					game.points -= 150;
 				}
-				
 			}else if(game.inRange == "Press E to buy your Freedom (Cost:5000)") {              // for escape later on
 				if(game.points >= 5000) {
 				game.inRange = "";
@@ -102,17 +119,23 @@ public class Player extends GameObject{
 				x = 160;
 				y = 128;
 				}
-			}else if(game.inRange == "Press E to buy Damage Perk (Cost:1000)"){                          //for damage perk
+			}else if(game.inRange == "Press E to buy Damage Perk (Cost:1000)"){          //for damage perk
 				if(game.points >= 1000 && !(game.ifBoughtDamagePerk == game.wave)) {
 					game.multy++;
 					game.points-=1000;
 					game.ifBoughtDamagePerk = game.wave;
 					}
-			}else if(game.inRange == "Press E to heal yourself(Cost:200)"){                          //for med-kits
+			}else if(game.inRange == "Press E to buy Speed Boost (Cost:750)"){            //for Speed Boost
+				if(game.points >= 750 && !(game.ifBoughtSpeedBoost == game.wave)) {
+					game.speedBoost++;
+					game.points-=1000;
+					game.ifBoughtSpeedBoost = game.wave;
+					}
+			}else if(game.inRange == "Press E to heal yourself(Cost:200)"){             //for med-kits
 				if(game.points >= 200  && game.hp < 100) {
 					game.hp = 100;
 					game.points -= 200;
-					}
+				}
 			}
 			
 		}
@@ -176,16 +199,17 @@ public class Player extends GameObject{
 			
 			if(tempObject.getId() == ID.Crate) {
 				if (getBounds().intersects(tempObject.getBounds())) {
-					game.inRange = "Press E to buy Ammo (Cost:150)";
-				}
-				if(game.xtraAmmo == 36) {
-					game.inRange = "";
+					if(game.xtraAmmo == 36) {
+						game.inRange = "You have Max Ammo";
+					}else {
+						game.inRange = "Press E to buy Ammo (Cost:150)";
+					}
 				}
 			}
 			
 			if(tempObject.getId() == ID.Escape) {
 				if (getBounds().intersects(tempObject.getBounds())) {
-					game.inRange = "Press E to buy your Freedom (Cost:1000)";
+					game.inRange = "Press E to buy your Freedom (Cost:5000)";
 				}
 			}
 			
@@ -200,9 +224,23 @@ public class Player extends GameObject{
 						game.inRange = "Out Of order till next round";
 					}else{
 						if(game.multy == 10) {
-							game.inRange = "You've reached max damage";
+							game.inRange = "You've reached max damage!";
 						}else {
 						game.inRange = "Press E to buy Damage Perk (Cost:1000)";
+						}
+
+					}
+				}
+			}
+			if(tempObject.getId() == ID.SpeedBoost) {
+				if (getBounds().intersects(tempObject.getBounds())) {
+					if(game.ifBoughtSpeedBoost == game.wave) {
+						game.inRange = "Out Of order till next round";
+					}else{
+						if(game.speedBoost == 2) {
+							game.inRange = "You've reached max speed!";
+						}else {
+						game.inRange = "Press E to buy Speed Boost (Cost:750)";
 						}
 
 					}

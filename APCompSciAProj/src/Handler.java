@@ -13,6 +13,9 @@ private boolean r = false;
 
 private boolean i = false;
 
+private boolean k = false;
+
+
 private boolean restart = false;
 
 public void tick() {
@@ -138,6 +141,16 @@ public boolean isReset() {
 
 public void setReset(boolean restart) {
 	this.restart = restart;
+}
+
+
+public boolean isKnife() {
+	return k;
+}
+
+
+public void setKnife(boolean k) {
+	this.k = k;
 }
 
 

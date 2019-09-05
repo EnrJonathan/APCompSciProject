@@ -21,7 +21,7 @@ private BufferedImage sprite_sheet = null;
 private BufferedImage floor = null;
 
 //damage multiplier
-public int multy = 1;
+public int multy = 0;
 
 //speed multiplier
 public int speedBoost = 0;  //max should be 2
@@ -35,7 +35,7 @@ public String inRange = "";
 
 //makes it so that you can only buy the perk once per round
 public int ifBoughtDamagePerk = 0;
-
+public int ifBoughtSpeedBoost = 0;
 
 //loosing and winning switch
 public boolean win = false;
@@ -47,7 +47,7 @@ public int hp = 100;
 
 
 //point system
-public int points = 0;
+public int points = 100000;
 
 
 ////inGameTimer
@@ -253,11 +253,17 @@ if(multy >= 10) {
 
 
 //speed boost display
-if(speedBoost > 0) {
+if(speedBoost > 0 && speedBoost < 2) {
 g.setColor(Color.white);
 g.setFont(multyOrBoostFont);
 g.drawString("Speed Booster: +" + (speedBoost * 50) + "%",5,400);
 g.setColor(Color.white);
+}
+if(speedBoost >= 2) {
+	g.setColor(Color.white);
+	g.setFont(multyOrBoostFont);
+	g.drawString("Speed Booster: +" + (speedBoost * 50) + "%" + "(MAX)",5,400);
+	g.setColor(Color.white);
 }
 
 //wave display
@@ -312,7 +318,7 @@ if(win) {
 //no ammo display
 if(mag==0 && xtraAmmo==0 && win == false && lose == false) {
 	g.setColor(Color.red);
-	g.drawString("No Ammo",500,300);
+	g.drawString("No Ammo",450,320);
 }
 
 ///////////////////////////////////
@@ -345,6 +351,9 @@ private void loadLevel(BufferedImage image) {
 			
 			if(green == 91 && red ==12 && blue == 172)                                
 				handler.addObject(new DamagePerk(xx*32, yy*32, ID.DamagePerk,ss));            
+			
+			if(green == 173 && red ==143 && blue == 12)                                
+				handler.addObject(new SpeedBoost(xx*32, yy*32, ID.SpeedBoost,ss));
 			
 			if(green == 255 && red == 243 && blue == 0)
 				handler.addObject(new Spawner(xx*32, yy*32, ID.Spawner, handler,this,ss));

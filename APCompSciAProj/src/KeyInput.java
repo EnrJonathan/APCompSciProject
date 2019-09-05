@@ -26,6 +26,7 @@ public class KeyInput extends KeyAdapter{
 				if(key == KeyEvent.VK_R) handler.setReload(true);
 				if(key == KeyEvent.VK_E) handler.setInteract(true);
 				if(key == KeyEvent.VK_SPACE) handler.setReset(true);
+				if(key == KeyEvent.VK_V) handler.setKnife(true);
 
 				
 			}
@@ -49,6 +50,7 @@ public class KeyInput extends KeyAdapter{
 				if(key == KeyEvent.VK_R) handler.setReload(false);
 				if(key == KeyEvent.VK_E) handler.setInteract(false);
 				if(key == KeyEvent.VK_SPACE) handler.setReset(false);
+				if(key == KeyEvent.VK_V) handler.setKnife(false);
 
 
 

@@ -10,5 +10,7 @@ public enum ID {
 	Spawner(),
 	MedKit(),
 	Chairs(),
+	SpeedBoost(),
+	Knife(),
 	DamagePerk();
 }
