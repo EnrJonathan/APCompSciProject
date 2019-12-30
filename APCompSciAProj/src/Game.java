@@ -47,7 +47,7 @@ public int hp = 100;
 
 
 //point system
-public int points = 100000;
+public int points = 0;
 
 
 ////inGameTimer

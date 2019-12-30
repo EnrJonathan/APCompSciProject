@@ -31,25 +31,25 @@ public class Player extends GameObject{
 		if (game.win == false && game.lose == false) {
 		if(handler.isUp()) {
 			game.inRange = "";
-			velY=-2 - game.speedBoost;
+			velY=-3 - game.speedBoost;
 		}
 		else if(!handler.isDown()) velY=0;
 		
 		if(handler.isDown()) {
 			game.inRange = "";
-			velY=2 + game.speedBoost;
+			velY=3 + game.speedBoost;
 		}
 		else if(!handler.isUp())velY=0;
 		
 		if(handler.isRight()) {
 			game.inRange = "";
-			velX=2 + game.speedBoost;
+			velX=3 + game.speedBoost;
 		}
 		else if(!handler.isLeft()) velX=0;
 		
 		if(handler.isLeft()) {
 			game.inRange = "";
-			velX=-2 - game.speedBoost;
+			velX=-3 - game.speedBoost;
 		}
 		else if(!handler.isRight()) velX=0;
 	}
@@ -128,7 +128,7 @@ public class Player extends GameObject{
 			}else if(game.inRange == "Press E to buy Speed Boost (Cost:750)"){            //for Speed Boost
 				if(game.points >= 750 && !(game.ifBoughtSpeedBoost == game.wave)) {
 					game.speedBoost++;
-					game.points-=1000;
+					game.points-=750;
 					game.ifBoughtSpeedBoost = game.wave;
 					}
 			}else if(game.inRange == "Press E to heal yourself(Cost:200)"){             //for med-kits
@@ -176,17 +176,16 @@ public class Player extends GameObject{
 					//y += velY * -1;
 					
 					
-					
-					x+=2 + game.speedBoost;
+					x+=3 + game.speedBoost;
 					if(getBounds().intersects(tempObject.getBounds())) {
-						x-=2 + game.speedBoost;
-						y+=2 + game.speedBoost;
+						x-=3 + game.speedBoost;
+						y+=3 + game.speedBoost;
 						if(getBounds().intersects(tempObject.getBounds())) {
-							y-=2 + game.speedBoost;
-							x-=2 + game.speedBoost;
+							y-=3 + game.speedBoost;
+							x-=3 + game.speedBoost;
 							if(getBounds().intersects(tempObject.getBounds())) {      //new wall collision fix
-								x+=2 + game.speedBoost;
-								y-=2 + game.speedBoost;
+								x+=3 + game.speedBoost;
+								y-=3 + game.speedBoost;
 								}
 							}
 						}
